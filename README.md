@@ -3,12 +3,15 @@
 ## Setup
 
 ```javascript
-import { translator } from 'bifrost-i18n';
-import { en, no } from './dictionary.js';
+import { bifrost } from 'bifrost-i18n';
+import { en, no } from './dictionaries.js';
 
-const t = translator({
+const t = bifrost({
   lang: 'nb-NO',
-  dictionaries: [no, en],
+  dictionaries: new Map([
+    ['nb-NO', no],
+    ['en-GB', en],
+  ]),
 });
 ```
 
@@ -18,7 +21,7 @@ const en = {
   "get-the-*": "get the _",
 
   // Replace in specific order
-  "multiple-*-by-*": "multiple _2 by _1",
+  "from-*-to-*": "from _2 to _1",
 
   // Simple plural
   "fetch-updates": {
@@ -49,7 +52,8 @@ export { en };
 
 #### Notes on setup:
 
-- `lang` is only used to translate numbers and other non dictionary translations. It should be a BCP 47 language tag. 
+- When specifying languages, use a [BCP 47 language tag](https://www.w3.org/International/articles/language-tags/).
+- `lang` is only used to translate numbers and other non dictionary translations. 
 - `dictionaries` determines the order in which Bifrost should look for strings. In the example above, it would first look in the Norwegian dictionary, then the English one. If none are found, it'll return an empty string.
 - With a JSON loader, you could import JSON files as JS files to use with Bifrost.
 
@@ -86,8 +90,8 @@ t('get-the-*', [['gin']]);
 ```
 
 ```javascript
-t('multiple-*-by-*', [[4,3]]);
-//=> "multiple 3 by 4"
+t('from-*-to-*', [['London', 'Oslo']]);
+//=> "from Oslo to London"
 ```
 
 ```javascript
