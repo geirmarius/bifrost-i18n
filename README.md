@@ -1,5 +1,7 @@
 # Bifrost i18n
 
+WIP: No code available yet.
+
 ## Setup
 
 ```javascript
@@ -29,22 +31,22 @@ const en = {
     "other": "fetch updates",
   },
 
-  // Multiple plurals (cardinals if given, then ordinals if given)
-  "tomatoes-and-cucumbers": {
-    "one/one": "tomato-and-cucumber",
-    "one/other": "tomato-and-cucumbers",
-    "other/one": "tomatoes-and-cucumber",
-    "other/other": "tomatoes-and-cucumbers",
-  },
+  // Multiple plurals
+  "tomatoes-and-cucumbers": new Map([
+    ["one/one", "tomato and cucumber"],
+    ["one/other", "tomato and cucumbers"],
+    ["other/one", "tomatoes and cucumber"],
+    ["other/other", "tomatoes and cucumbers"],
+  ]),
 
-  // Plural, but it's intended for ordinals only
-  "the-nth-update": {
-    "one": "the first update",
-    "two": "the second update",
-    "few": "the third update",
-    "many": "the forth update",
-    "other": "the _th update",
-  },
+  // Plural, but it's for ordinals only
+  "the-nth-update": new Map([
+    ["o-one", "the first update"],
+    ["o-two", "the second update"],
+    ["o-few", "the third update"],
+    ["o-many", "the forth update"],
+    ["o-other", "the _th update"],
+  ]),
 };
 
 export { en };
@@ -152,3 +154,7 @@ t(500000);
 t(3.14);
 //=> "3,14"
 ```
+
+### Dates
+
+Coming
