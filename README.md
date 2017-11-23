@@ -53,8 +53,8 @@ const en = new Map([
   ])],
 
   // Combined cardinal and ordinal plurals
-  ['n-iron-bars-and-n-gold-coins-for-my-nth-legandry-sword': new Map([
-    ['one/one|one', '_ iron ore and _ gold coin for my _st legendary sword'],
+  ['n-iron-bars-and-n-gold-coins-for-my-nth-legandry-sword-on-my-nth-character': new Map([
+    ['one/other|few/two', '_ iron ore and _ gold coins for my _rd legendary sword on my _nd character'],
     ...allOtherCombinations,
   ])],
 ]);
