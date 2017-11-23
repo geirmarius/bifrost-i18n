@@ -30,10 +30,10 @@ const en = new Map([
   ['from-*-to-*': 'from _2 to _1'],
 
   // Simple plural
-  ['fetch-updates': {
-    'one': 'fetch update',
-    'other': 'fetch updates',
-  }],
+  ['fetch-updates': new Map([
+    ['one': 'fetch update'],
+    ['other': 'fetch updates'],
+  ])],
 
   // Multiple plurals
   ['tomatoes-and-cucumbers', new Map([
