@@ -1,6 +1,8 @@
 # Bifrost i18n
 
-WIP: No code available yet.
+```javascript
+t(x, options)
+```
 
 ## Setup
 
@@ -9,7 +11,7 @@ import { bifrost } from 'bifrost-i18n';
 import { en, no } from './dictionaries.js';
 
 const t = bifrost({
-  lang: 'nb-NO',
+  language: 'nb-NO',
   dictionaries: new Map([
     ['nb-NO', no],
     ['en-GB', en],
@@ -18,36 +20,44 @@ const t = bifrost({
 ```
 
 ```javascript
-const en = {
+const en = new Map([
+  ['key', 'value'],
+
   // Simple replace
-  "get-the-*": "get the _",
+  ['get-the-*': 'get the _'],
 
   // Replace in specific order
-  "from-*-to-*": "from _2 to _1",
+  ['from-*-to-*': 'from _2 to _1'],
 
   // Simple plural
-  "fetch-updates": {
-    "one": "fetch update",
-    "other": "fetch updates",
-  },
+  ['fetch-updates': {
+    'one': 'fetch update',
+    'other': 'fetch updates',
+  }],
 
   // Multiple plurals
-  "tomatoes-and-cucumbers": new Map([
-    ["one/one", "tomato and cucumber"],
-    ["one/other", "tomato and cucumbers"],
-    ["other/one", "tomatoes and cucumber"],
-    ["other/other", "tomatoes and cucumbers"],
-  ]),
+  ['tomatoes-and-cucumbers', new Map([
+    ['one/one', 'tomato and cucumber'],
+    ['one/other', 'tomato and cucumbers'],
+    ['other/one', 'tomatoes and cucumber'],
+    ['other/other', 'tomatoes and cucumbers'],
+  ])],
 
   // Plural, but it's for ordinals only
-  "the-nth-update": new Map([
-    ["o-one", "the first update"],
-    ["o-two", "the second update"],
-    ["o-few", "the third update"],
-    ["o-many", "the forth update"],
-    ["o-other", "the _th update"],
-  ]),
-};
+  ['the-nth-update', new Map([
+    ['|one', 'the first update'],
+    ['|two', 'the second update'],
+    ['|few', 'the third update'],
+    ['|many', 'the forth update'],
+    ['|other', 'the _th update'],
+  ])],
+
+  // Combined cardinal and ordinal plurals
+  ['n-iron-bars-and-n-gold-coins-for-my-nth-legandry-sword': new Map([
+    ['one/one|one', '_ iron ore and _ gold coin for my _st legendary sword'],
+    ...allOtherCombinations,
+  ])],
+]);
 
 export { en };
 ```
@@ -55,9 +65,8 @@ export { en };
 #### Notes on setup:
 
 - When specifying languages, use a [BCP 47 language tag](https://www.w3.org/International/articles/language-tags/).
-- `lang` is only used to translate numbers and other non dictionary translations. 
+- `language` is only used to translate numbers and other non dictionary translations. 
 - `dictionaries` determines the order in which Bifrost should look for strings. In the example above, it would first look in the Norwegian dictionary, then the English one. If none are found, it'll return an empty string.
-- With a JSON loader, you could import JSON files as JS files to use with Bifrost.
 
 ## Use
 
@@ -73,7 +82,7 @@ If key is string, the options are (in order):
 t('key', [[/*1.*/][/*2.*/][/*3.*/]]);
 ```
 
-or in object form:
+In object form, the options are:
 
 ```javascript
 t('key', {
@@ -85,6 +94,11 @@ t('key', {
 
 
 #### English:
+
+```javascript
+t('key');
+//=> "value"
+```
 
 ```javascript
 t('get-the-*', [['gin']]);
@@ -157,4 +171,4 @@ t(3.14);
 
 ### Dates
 
-Coming
+_Coming_
