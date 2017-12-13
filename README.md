@@ -1,6 +1,7 @@
 # Bifrost i18n
 
 ```javascript
+WIP
 t(x, options)
 ```
 
