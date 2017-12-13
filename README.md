@@ -1,7 +1,8 @@
 # Bifrost i18n
 
+WIP translation library enabling dictionary look ups, localized numbers and dates.
+
 ```javascript
-WIP
 t(x, options)
 ```
 
