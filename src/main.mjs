@@ -18,22 +18,22 @@ const bifrost = ({ language, dictionaries }) => {
   }
 
   return (key, options) => {
-    switch (typeof key) {
-      case 'string':
+    switch (key.constructor) {
+      case String:
         return dictionaryLookup({
           languageSets,
           key,
           options,
         });
 
-      case 'number':
+      case Number:
         return formatNumber({
           numberFormatter,
           key,
         });
 
       default:
-        throw new TypeError(`Type ${typeof key} is not a valid key`);
+        throw new TypeError(`${key.constructor} is not a valid key type`);
     }
   };
 };

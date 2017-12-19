@@ -17,12 +17,12 @@ const findInDictionaries = ({ key, languageSets, options }) => {
 
     if (!value) continue;
 
-    switch (Object.prototype.toString.call(value)) {
-      case '[object String]': {
+    switch (value.constructor) {
+      case String: {
         return value;
       }
 
-      case '[object Map]': {
+      case Map: {
         const languageSet = languageSets.get(language);
 
         const cardinalKey = pluralKey({
