@@ -11,9 +11,8 @@ const splitKey = (key) => {
 }
 
 const findInDictionaries = ({ key, languageSets, options }) => {
-  for (const entry of languageSets) {
-    const language = entry[0];
-    const value = entry[1].dictionary.get(key);
+  for (const [language, languageSet] of languageSets) {
+    const value = languageSet.dictionary.get(key);
 
     if (!value) continue;
 
@@ -23,8 +22,6 @@ const findInDictionaries = ({ key, languageSets, options }) => {
       }
 
       case Map: {
-        const languageSet = languageSets.get(language);
-
         const cardinalKey = pluralKey({
           formatter: languageSet.cardinalRules,
           numbers: options[1] || options.cardinals || [],
@@ -35,12 +32,12 @@ const findInDictionaries = ({ key, languageSets, options }) => {
           numbers: options[2] || options.ordinals || [],
         })
 
-        for (const entry of value) {
-          const cardinalIndex = cardinalKey.indexOf(splitKey(entry[0])[0]);
-          const ordinalIndex = ordinalKey.indexOf(splitKey(entry[0])[1]);
+        for (const [key, subValue] of value) {
+          const cardinalIndex = cardinalKey.indexOf(splitKey(key)[0]);
+          const ordinalIndex = ordinalKey.indexOf(splitKey(key)[1]);
 
           if (~cardinalIndex && ~ordinalIndex) {
-            return entry[1];
+            return subValue;
           }
         }
 

@@ -6,11 +6,9 @@ const bifrost = ({ language, dictionaries }) => {
   const numberFormatter = new Intl.NumberFormat(language);
 
   if (dictionaries) {
-    for (const dictionaryEntry of dictionaries) {
-      const language = dictionaryEntry[0];
-
+    for (const [language, dictionary] of dictionaries) {
       languageSets.set(language, {
-        dictionary: dictionaryEntry[1],
+        dictionary,
         cardinalRules: new Intl.PluralRules(language, { type: 'cardinal' }),
         ordinalRules: new Intl.PluralRules(language, { type: 'ordinal' }),
       });
@@ -33,7 +31,7 @@ const bifrost = ({ language, dictionaries }) => {
         });
 
       default:
-        throw new TypeError(`${key.constructor} is not a valid key type`);
+        throw new TypeError(`${key.constructor.name} is not a valid key type`);
     }
   };
 };
